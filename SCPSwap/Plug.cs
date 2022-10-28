@@ -64,12 +64,20 @@ namespace SCPSwap
 
         public void onRoundStart()
         {
+            if (ConfigManager.SCPSwap_enableBroadcast)
+            {
+                List<Player> inRoundSCPs = (from p in Player.List where p.Team == Team.SCP select p).ToList<Player>();
+                foreach (Player p in inRoundSCPs)
+                {
+                    p.Broadcast(ConfigManager.SCPSwap_Broadcast, ConfigManager.SCPSwap_timeBroadcast);
+                }
+            }
             whenStart = DateTime.Now;
         }
 
         public void onConsoleSend(SendingConsoleEvent ev)
         {
-            if (ev.Name == "scpswap")
+            if (ev.Name == ConfigManager.SCPSwap_command)
             {
                 ev.Allowed = false;
                 if ((DateTime.Now - whenStart).TotalSeconds < ConfigManager.SCPSwap_time)
@@ -80,122 +88,122 @@ namespace SCPSwap
                         switch (ev.Args[0])
                         {
                             case "info":
-                                ev.Player.SendConsoleMessage("List of SCPs: 173, 096, 079, 106, 049, 939", "green");
+                                ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_argInfo, "green");
                                 return;
                             case "173":
                                 if (ev.Player.Role == RoleType.Scp173)
                                 {
-                                    ev.Player.SendConsoleMessage("You are already that SCP", "red");
+                                    ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyThatSCP, "red");
                                     return;
                                 }
                                 foreach(Player p in inRoundSCPs)
                                 {
                                     if (p.Role == RoleType.Scp173)
                                     {
-                                        ev.Player.SendConsoleMessage("You can't become this SCP because it's already there", "red");
+                                        ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyBusySCP, "red");
                                         return;
                                     }
                                 }
                                 ev.Player.Role = RoleType.Scp173;
-                                ev.Player.SendConsoleMessage("Successfully", "green");
+                                ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_Successfully, "green");
                                 return;
                             case "096":
                                 if (ev.Player.Role == RoleType.Scp096)
                                 {
-                                    ev.Player.SendConsoleMessage("You are already that SCP", "red");
+                                    ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyThatSCP, "red");
                                     return;
                                 }
                                 foreach (Player p in inRoundSCPs)
                                 {
                                     if (p.Role == RoleType.Scp096)
                                     {
-                                        ev.Player.SendConsoleMessage("You can't become this SCP because it's already there", "red");
+                                        ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyBusySCP, "red");
                                         return;
                                     }
                                 }
                                 ev.Player.Role = RoleType.Scp096;
-                                ev.Player.SendConsoleMessage("Successfully", "green");
+                                ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_Successfully, "green");
                                 return;
                             case "079":
                                 if (ev.Player.Role == RoleType.Scp079)
                                 {
-                                    ev.Player.SendConsoleMessage("You are already that SCP", "red");
+                                    ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyThatSCP, "red");
                                     return;
                                 }
                                 foreach (Player p in inRoundSCPs)
                                 {
                                     if (p.Role == RoleType.Scp079)
                                     {
-                                        ev.Player.SendConsoleMessage("You can't become this SCP because it's already there", "red");
+                                        ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyBusySCP, "red");
                                         return;
                                     }
                                 }
                                 ev.Player.Role = RoleType.Scp079;
-                                ev.Player.SendConsoleMessage("Successfully", "green");
+                                ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_Successfully, "green");
                                 return;
                             case "106":
                                 if (ev.Player.Role == RoleType.Scp106)
                                 {
-                                    ev.Player.SendConsoleMessage("You are already that SCP", "red");
+                                    ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyThatSCP, "red");
                                     return;
                                 }
                                 foreach (Player p in inRoundSCPs)
                                 {
                                     if (p.Role == RoleType.Scp106)
                                     {
-                                        ev.Player.SendConsoleMessage("You can't become this SCP because it's already there", "red");
+                                        ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyBusySCP, "red");
                                         return;
                                     }
                                 }
                                 ev.Player.Role = RoleType.Scp106;
-                                ev.Player.SendConsoleMessage("Successfully", "green");
+                                ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_Successfully, "green");
                                 return;
                             case "049":
                                 if (ev.Player.Role == RoleType.Scp049)
                                 {
-                                    ev.Player.SendConsoleMessage("You are already that SCP", "red");
+                                    ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyThatSCP, "red");
                                     return;
                                 }
                                 foreach (Player p in inRoundSCPs)
                                 {
                                     if (p.Role == RoleType.Scp049)
                                     {
-                                        ev.Player.SendConsoleMessage("You can't become this SCP because it's already there", "red");
+                                        ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyBusySCP, "red");
                                         return;
                                     }
                                 }
                                 ev.Player.Role = RoleType.Scp049;
-                                ev.Player.SendConsoleMessage("Successfully", "green");
+                                ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_Successfully, "green");
                                 return;
                             case "939":
                                 if (ev.Player.Role == RoleType.Scp93953 || ev.Player.Role == RoleType.Scp93989)
                                 {
-                                    ev.Player.SendConsoleMessage("You are already that SCP", "red");
+                                    ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyThatSCP, "red");
                                     return;
                                 }
                                 foreach (Player p in inRoundSCPs)
                                 {
                                     if (p.Role == RoleType.Scp93953 || p.Role == RoleType.Scp93989)
                                     {
-                                        ev.Player.SendConsoleMessage("You can't become this SCP because it's already there", "red");
+                                        ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_alreadyBusySCP, "red");
                                         return;
                                     }
                                 }
                                 ev.Player.Role = RoleType.Scp93953;
-                                ev.Player.SendConsoleMessage("Successfully", "green");
+                                ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_Successfully, "green");
                                 return;
                             default:
-                                ev.Player.SendConsoleMessage("Invalid usage: .scpswap [info|<SCP_NUM>]", "red");
+                                ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_usage, "red");
                                 return;
                         }
                     } else
                     {
-                        ev.Player.SendConsoleMessage("This command can only be used by SCP", "red");
+                        ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_scpOnly, "red");
                         return;
                     }
                 } else
                 {
-                    ev.Player.SendConsoleMessage("This command can no longer be used", "red");
+                    ev.Player.SendConsoleMessage(ConfigManager.SCPSwap_muchTime, "red");
                     return;
                 }
             }
