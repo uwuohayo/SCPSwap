@@ -31,7 +31,7 @@ namespace SCPSwap
 
             SCPSwap_enableBroadcast = Plug.Config.GetBool("SCPSwap_enableBroadcast", true, "on or off start broadcast with info about scpswap?");
             SCPSwap_timeBroadcast = Plug.Config.GetUShort("SCPSwap_timeBroadcast", 15, "time for broadcast");
-            SCPSwap_Broadcast = Plug.Config.GetString("SCPSwap_Broadcast", "You can use command .scpswap at the round start!\nJust write it in Game Console", "broadcast info");
+            SCPSwap_Broadcast = Plug.Config.GetString("SCPSwap_Broadcast", "You can use command <color=#FF60A9>.scpswap</color> at the round start!\nJust write it in <color=#FF60A9>Game Console</color>", "broadcast info");
 
             SCPSwap_muchTime = Plug.Config.GetString("SCPSwap_muchTime", "This command can no longer be used", "message wnen the time to use the command has run out");
             SCPSwap_scpOnly = Plug.Config.GetString("SCPSwap_scpOnly", "This command can only be used by SCP", "message that is shown when a command is entered by a non scp player");
